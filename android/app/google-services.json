@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "546122689105",
+    "project_id": "login-prac-9040e",
+    "storage_bucket": "login-prac-9040e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:546122689105:android:829b715c33901e04b8e670",
+        "android_client_info": {
+          "package_name": "com.example.login_prac"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "546122689105-2mktbth191bra7cdv26jveiim8eghl9f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.login_prac",
+            "certificate_hash": "4742aafd9350ecc5a9f83e9280c6865e6a14ed97"
+          }
+        },
+        {
+          "client_id": "546122689105-48ml18ah376218tfkbsunivek63ql5oa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGLG2lMnj13T7_z7Gj-XKCyAnBkkwoMf8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "546122689105-48ml18ah376218tfkbsunivek63ql5oa.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "546122689105-pfo1v2gk235q14mfr0qfq7jgf3dp692t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.loginPrac"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
