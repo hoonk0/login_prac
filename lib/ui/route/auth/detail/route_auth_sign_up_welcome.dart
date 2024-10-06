@@ -45,7 +45,7 @@ class RouteAuthSignUpWelcome extends StatelessWidget {
                   colorBg: colorPurple500,
                   onTap: () {
                     Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (context) => const RouteMain()),
+                      MaterialPageRoute(builder: (context) => const RouteSplash()),
                       (route) => false,
                     );
                   }),

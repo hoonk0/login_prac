@@ -19,6 +19,10 @@ class StreamMe {
     streamSubscription = FirebaseFirestore.instance.collection(keyUser).doc(Global.uid).snapshots().listen(
       (event) async {
         debugPrint('listenMe 업데이트');
+
+        Global.userNotifier.value = ModelUser.fromJson(event.data()!);
+
+
 /*
         try {
           Global.userNotifier.value = ModelUser.fromJson(event.data()!);

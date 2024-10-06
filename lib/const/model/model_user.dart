@@ -1,5 +1,19 @@
-
 import '../enums/enums.dart';
+
+
+
+
+
+
+
+
+
+
+Map<String, dynamic> map = {
+  'uid': '12lkjsdofijsadfilsdf',
+  'email': 'kjw0507@naver.com',
+  'list_phone_number':['010-5838-6758','010-1234-5678'],
+};
 
 class ModelUser {
   final String uid;
@@ -26,7 +40,8 @@ class ModelUser {
       pw: data['pw'],
       nickname: data['nickname'],
       imageUrl: data['imageUrl'],
-      loginType: data['loginType'] == null ? LoginType.email : LoginType.values.firstWhere((e) => e.name == data['loginType']),
+      loginType:
+          data['loginType'] == null ? LoginType.email : LoginType.values.firstWhere((e) => e.name == data['loginType']),
     );
   }
 

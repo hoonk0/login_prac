@@ -20,17 +20,10 @@ class _RouteSplashState extends ConsumerState<RouteSplash> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Future.delayed(const Duration(milliseconds: 2000), () {
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => const RouteAuthLogin(),
-        ),
-      );
-    });
+    _checkUserAndInitData();
   }
 
-
-  Future<void> checkUserAndInitData() async {
+  Future<void> _checkUserAndInitData() async {
     final pref = await SharedPreferences.getInstance();
     final uid = pref.getString('uid');
 
@@ -44,12 +37,15 @@ class _RouteSplashState extends ConsumerState<RouteSplash> {
             Navigator.of(context).push(MaterialPageRoute(builder: (context) => RouteAuthLogin()));
           }
 
-          /// FirebaseAuth에 등록되어 있음
+          /// uid 를 들고 있을 때
           else {
+            await Future.delayed(Duration(milliseconds: 2000));
+
             StreamMe.listenMe(ref);
 
             WidgetsBinding.instance.endOfFrame.then((value) async {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const RouteMain(), settings: const RouteSettings(name: 'home')));
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const RouteMain(), settings: const RouteSettings(name: 'home')));
             });
           }
         },
@@ -65,7 +61,10 @@ class _RouteSplashState extends ConsumerState<RouteSplash> {
     return Scaffold(
       backgroundColor: colorWhite,
       body: Center(
-        child: Text('splash',style: TS.s24w600(colorBlack),),
+        child: Text(
+          'splash',
+          style: TS.s24w600(colorBlack),
+        ),
       ),
     );
   }

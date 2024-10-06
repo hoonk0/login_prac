@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:login_prac/const/static/global.dart';
 import 'package:uuid/uuid.dart';
 import '../../../const/enums/enums.dart';
 import '../../../const/model/model_user.dart';
@@ -78,7 +79,8 @@ class _RouteAuthSignUpState extends State<RouteAuthSignUp> {
     final isPasswordValid = _isValidPassword();
     final isPasswordConfirmed = tecPw.text == tecPwConfirm.text;
 
-    vnSignUpButtonEnabled.value = allFieldsFilled && isEmailValid && isPasswordValid && isPasswordConfirmed && vnIsAuthNumberMatch.value;
+    vnSignUpButtonEnabled.value =
+        allFieldsFilled && isEmailValid && isPasswordValid && isPasswordConfirmed && vnIsAuthNumberMatch.value;
   }
 
   @override
@@ -137,8 +139,10 @@ class _RouteAuthSignUpState extends State<RouteAuthSignUp> {
                                   colorBg: isEmailMatch ? colorPurple500 : colorPurple100,
                                   onTap: isEmailMatch
                                       ? () async {
-                                          final userDs =
-                                              await FirebaseFirestore.instance.collection(keyUser).where(keyEmail, isEqualTo: tecEmail.text).get();
+                                          final userDs = await FirebaseFirestore.instance
+                                              .collection(keyUser)
+                                              .where(keyEmail, isEqualTo: tecEmail.text)
+                                              .get();
                                           if (userDs.docs.isNotEmpty) {
                                             Utils.toast(desc: 'Already registered email');
                                             return;
@@ -147,8 +151,8 @@ class _RouteAuthSignUpState extends State<RouteAuthSignUp> {
                                           final random = Random();
                                           authNumber = random.nextInt(10000).toString().padLeft(4, '0');
 
-                                          final result =
-                                              await Utils.sendEmail(tecEmail.text, 'Welcome to Chapter book quiz', 'Verification number $authNumber');
+                                          final result = await Utils.sendEmail(tecEmail.text,
+                                              'Welcome to Chapter book quiz', 'Verification number $authNumber');
 
                                           showDialog(
                                             context: context,
@@ -229,8 +233,10 @@ class _RouteAuthSignUpState extends State<RouteAuthSignUp> {
                                   onTap: () async {
                                     FocusManager.instance.primaryFocus?.unfocus();
 
-                                    final userDs =
-                                        await FirebaseFirestore.instance.collection(keyUser).where(keyNickname, isEqualTo: tecNickName.text).get();
+                                    final userDs = await FirebaseFirestore.instance
+                                        .collection(keyUser)
+                                        .where(keyNickname, isEqualTo: tecNickName.text)
+                                        .get();
                                     if (userDs.docs.isNotEmpty) {
                                       await showDialog(
                                         context: context,
@@ -316,7 +322,8 @@ class _RouteAuthSignUpState extends State<RouteAuthSignUp> {
                               valueListenable: vnObscurePwNotifier,
                               builder: (context, _obscurePw, child) {
                                 return TextFieldBorder(
-                                  errorText: tecPw.text.isEmpty || regPw.hasMatch(tecPw.text) ? null : '6 characters or more',
+                                  errorText:
+                                      tecPw.text.isEmpty || regPw.hasMatch(tecPw.text) ? null : '6 characters or more',
                                   controller: tecPw,
                                   obscureText: _obscurePw,
                                   hintText: 'Enter Password',
@@ -347,7 +354,9 @@ class _RouteAuthSignUpState extends State<RouteAuthSignUp> {
                                   controller: tecPwConfirm,
                                   obscureText: _obscurePwConfirm,
                                   hintText: 'Re-enter Password',
-                                  errorText: tecPwConfirm.text.isEmpty || tecPw.text == tecPwConfirm.text ? null : 'Password does not match',
+                                  errorText: tecPwConfirm.text.isEmpty || tecPw.text == tecPwConfirm.text
+                                      ? null
+                                      : 'Password does not match',
                                   suffixIcon: IconButton(
                                     icon: Icon(
                                       _obscurePwConfirm ? Icons.visibility_off : Icons.visibility,
@@ -401,7 +410,9 @@ class _RouteAuthSignUpState extends State<RouteAuthSignUp> {
   /// Sign Up
   Future<void> _signUp() async {
     FocusManager.instance.primaryFocus?.unfocus();
+
     final uid = const Uuid().v4();
+
     final modelUser = ModelUser(
       uid: uid,
       email: tecEmail.text,
@@ -410,6 +421,8 @@ class _RouteAuthSignUpState extends State<RouteAuthSignUp> {
       loginType: LoginType.email,
     );
     await FirebaseFirestore.instance.collection(keyUser).doc(modelUser.uid).set(modelUser.toJson());
+
+    //FirebaseFirestore.instance.collection(keyUser).doc(Global.userNotifier.value!.uid).
 
     Navigator.of(context).push(
       MaterialPageRoute(

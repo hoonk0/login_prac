@@ -140,8 +140,12 @@ class _RouteAuthSnsSignUpState extends State<RouteAuthSnsSignUp> {
                             );
                             try {
                               await FirebaseFirestore.instance.collection(keyUser).doc(modelUser.uid).set(modelUser.toJson());
+
+
                               final pref = await SharedPreferences.getInstance();
-                              pref.setString(keyUid, widget.uid);
+
+                              pref.setString('uid', widget.uid);
+
                               Navigator.of(context).push(MaterialPageRoute(builder: (context) => const RouteAuthSignUpWelcome()));
                             } catch (e) {}
                           }
